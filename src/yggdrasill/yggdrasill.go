@@ -27,7 +27,7 @@ func  configureToken()(error) {
 	ACCESS_TOKEN = os.Getenv("ACCESS_TOKEN")
 	ACCESS_TOKEN_SECRET = os.Getenv("ACCESS_TOKEN_SECRET")
 
-	if CONSUMER_KEY != "" || CONSUMER_KEY_SECRET == "" || ACCESS_TOKEN == "" || ACCESS_TOKEN_SECRET == "" {
+	if CONSUMER_KEY == "" || CONSUMER_KEY_SECRET == "" || ACCESS_TOKEN == "" || ACCESS_TOKEN_SECRET == "" {
 		return  fmt.Errorf("error %d", 1)
 	}
 	return nil
