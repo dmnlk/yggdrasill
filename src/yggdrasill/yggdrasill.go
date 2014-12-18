@@ -3,7 +3,13 @@ package main
 import (
 	"fmt"
 	"os"
+	"github.com/mrjones/oauth"
 )
+
+type  api struct {
+	consumer *oauth.Consumer
+	token *oauth.AccessToken
+}
 
 var (
 	CONSUMER_KEY string
@@ -11,6 +17,13 @@ var (
 	ACCESS_TOKEN string
 	ACCESS_TOKEN_SECRET string
 )
+
+var provider  = oauth.ServiceProvider{
+	AuthorizeTokenUrl: "https://api.twitter.com/oauth/authorize",
+	RequestTokenUrl:   "https://api.twitter.com/oauth/request_token",
+	AccessTokenUrl:    "https://api.twitter.com/oauth/access_token",
+}
+
 func main() {
 
 	error := configureToken()
