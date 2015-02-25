@@ -42,7 +42,7 @@ func configureToken() error {
 	ACCESS_TOKEN = os.Getenv("ACCESS_TOKEN")
 	ACCESS_TOKEN_SECRET = os.Getenv("ACCESS_TOKEN_SECRET")
 	PROWL_API_KEY = os.Getenv("PROWL_API_KEY")
-	if ng := stringUtils.IsAnyEmpty(CONSUMER_KEY, CONSUMER_KEY_SECRET, ACCESS_TOKEN, ACCESS_TOKEN_SECRET); ng {
+	if ng := stringUtils.IsAnyEmpty(CONSUMER_KEY, CONSUMER_KEY_SECRET, ACCESS_TOKEN, ACCESS_TOKEN_SECRET, PROWL_API_KEY); ng {
 		return fmt.Errorf("some key invalid")
 	}
 
