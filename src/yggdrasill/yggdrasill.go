@@ -31,7 +31,7 @@ func main() {
 
 		}
 		if &e != nil {
-			sendProwl(e)
+			sendEventToProwl(e)
 		}
 	})
 }
@@ -49,7 +49,7 @@ func configureToken() error {
 	return nil
 }
 
-func sendProwl(e gomadare.Event) {
+func sendEventToProwl(e gomadare.Event) {
 
 	var p goprowl.Goprowl
 	err := p.RegisterKey(PROWL_API_KEY)
