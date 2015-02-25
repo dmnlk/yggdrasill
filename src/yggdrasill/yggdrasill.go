@@ -15,10 +15,16 @@ var (
 	ACCESS_TOKEN        string
 	ACCESS_TOKEN_SECRET string
 	PROWL_API_KEY       string
+	PROWL goprowl.Goprowl
 )
 
 func main() {
 	error := configureToken()
+	if error != nil {
+		fmt.Println(error)
+		return
+	}
+	error = PROWL.RegisterKey(PROWL_API_KEY)
 	if error != nil {
 		fmt.Println(error)
 		return
@@ -51,12 +57,12 @@ func configureToken() error {
 
 func sendEventToProwl(e gomadare.Event) {
 
-	var p goprowl.Goprowl
-	err := p.RegisterKey(PROWL_API_KEY)
-	if err != nil {
-		fmt.Println(err)
-		return
-	}
+//	var p goprowl.Goprowl
+//	err := p.RegisterKey(PROWL_API_KEY)
+//	if err != nil {
+//		fmt.Println(err)
+//		return
+//	}
 
 	n := &goprowl.Notification{
 		Application: "Twitter",
@@ -67,6 +73,6 @@ func sendEventToProwl(e gomadare.Event) {
 		Url:         "www.foobar.com",
 	}
 
-	p.Push(n)
+	PROWL.Push(n)
 
 }
