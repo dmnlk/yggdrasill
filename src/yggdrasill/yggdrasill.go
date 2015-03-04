@@ -7,6 +7,7 @@ import (
 	"github.com/dmnlk/gomadare"
 	"github.com/dmnlk/stringUtils"
 	"github.com/rem7/goprowl"
+	"github.com/k0kubun/pp"
 )
 
 var (
@@ -31,7 +32,7 @@ func main() {
 	}
 
 	client := gomadare.NewClient(CONSUMER_KEY, CONSUMER_KEY_SECRET, ACCESS_TOKEN, ACCESS_TOKEN_SECRET)
-
+	fmt.Println("aa")
 	client.GetUserStream(nil, func(s gomadare.Status, e gomadare.Event) {
 		if &s != nil {
 
@@ -66,4 +67,10 @@ func sendEventToProwl(e gomadare.Event) {
 
 	PROWL.Push(n)
 
+}
+
+func sendReplyAndRetweetToProwl(s gomadare.Status) {
+	if s.Entities.UserMentions != nil{
+		pp.Print(s.Entities.UserMentions)
+	}
 }
