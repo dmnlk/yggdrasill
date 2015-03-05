@@ -35,7 +35,7 @@ func main() {
 	fmt.Println("aa")
 	client.GetUserStream(nil, func(s gomadare.Status, e gomadare.Event) {
 		if &s != nil {
-
+			sendReplyAndRetweetToProwl(s)
 		}
 		if &e != nil {
 			sendEventToProwl(e)
@@ -72,7 +72,5 @@ func sendEventToProwl(e gomadare.Event) {
 }
 
 func sendReplyAndRetweetToProwl(s gomadare.Status) {
-	if s.Entities.UserMentions != nil{
-		pp.Print(s.Entities.UserMentions)
-	}
+	pp.Print(s.Entities.UserMentions)
 }
