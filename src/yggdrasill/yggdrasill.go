@@ -57,7 +57,9 @@ func configureToken() error {
 }
 
 func sendEventToProwl(e gomadare.Event) {
-
+	if stringUtils.IsEmpty(e.Event) {
+		return;
+	}
 	n := &goprowl.Notification{
 		Application: "Twitter",
 		Description:  e.Event + " " + e.TargetObject.Text,
