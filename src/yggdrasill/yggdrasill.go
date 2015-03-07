@@ -60,7 +60,7 @@ func sendEventToProwl(e gomadare.Event) {
 	if stringUtils.IsEmpty(e.Event) {
 		return;
 	}
-	emoji := getEmoji(e)
+	emoji := getEventEmoji(e)
 	n := &goprowl.Notification{
 		Application: "Twitter",
 		Description:  emoji + " " + e.TargetObject.Text,
@@ -71,7 +71,7 @@ func sendEventToProwl(e gomadare.Event) {
 	PROWL.Push(n)
 }
 
-func getEmoji(event gomadare.Event) string {
+func getEventEmoji(event gomadare.Event) string {
 	if event.Event == "favorite" {
 		return "\u2b50"
 	}
