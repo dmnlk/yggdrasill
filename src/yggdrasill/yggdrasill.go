@@ -7,7 +7,6 @@ import (
 	"github.com/dmnlk/gomadare"
 	"github.com/dmnlk/stringUtils"
 	"github.com/rem7/goprowl"
-	"github.com/k0kubun/pp"
 )
 
 var (
@@ -16,7 +15,7 @@ var (
 	ACCESS_TOKEN        string
 	ACCESS_TOKEN_SECRET string
 	PROWL_API_KEY       string
-	PROWL goprowl.Goprowl
+	PROWL               goprowl.Goprowl
 )
 
 func main() {
@@ -35,10 +34,10 @@ func main() {
 	fmt.Println("aa")
 	client.GetUserStream(nil, func(s gomadare.Status, e gomadare.Event) {
 		if &s != nil {
-			sendReplyAndRetweetToProwl(s)
+			go sendReplyAndRetweetToProwl(s)
 		}
 		if &e != nil {
-			sendEventToProwl(e)
+			go sendEventToProwl(e)
 		}
 	})
 }
@@ -58,12 +57,12 @@ func configureToken() error {
 
 func sendEventToProwl(e gomadare.Event) {
 	if stringUtils.IsEmpty(e.Event) {
-		return;
+		return
 	}
 	emoji := getEventEmoji(e)
 	n := &goprowl.Notification{
 		Application: "Twitter",
-		Description:  emoji + " " + e.TargetObject.Text,
+		Description: emoji + " " + e.TargetObject.Text,
 		Event:       e.Event + " by " + e.Source.Name,
 		Priority:    "1",
 	}
@@ -82,5 +81,17 @@ func getEventEmoji(event gomadare.Event) string {
 }
 
 func sendReplyAndRetweetToProwl(s gomadare.Status) {
-	pp.Print(s.Entities.UserMentions)
+	if len(s.Entities.UserMentions) > 0 {
+		for _, mention := range s.Entities.UserMentions {
+			if mention.ScreenName == "dmnlk" {
+				n := &goprowl.Notification{
+					Application: "Golang",
+					Description: "\U0001f4a1" + " " + s.Text,
+					Event:       "Mentioned by " + s.User.ScreenName,
+					Priority:    "1",
+				}
+				PROWL.Push(n)
+			}
+		}
+	}
 }
