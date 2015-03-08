@@ -63,7 +63,7 @@ func sendEventToProwl(e gomadare.Event) {
 	n := &goprowl.Notification{
 		Application: "Twitter",
 		Description: emoji + " " + e.TargetObject.Text,
-		Event:       e.Event + " by " + e.Source.Name,
+		Event:       e.Event + " by " + e.Source.ScreenName,
 		Priority:    "1",
 	}
 
