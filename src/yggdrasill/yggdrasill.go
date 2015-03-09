@@ -1,8 +1,13 @@
 package main
 
 import (
+	"bytes"
 	"fmt"
 	"os"
+
+	"encoding/gob"
+	"io/ioutil"
+	"log"
 
 	"github.com/dmnlk/gomadare"
 	"github.com/dmnlk/stringUtils"
@@ -81,6 +86,7 @@ func getEventEmoji(event gomadare.Event) string {
 }
 
 func sendReplyAndRetweetToProwl(s gomadare.Status) {
+	// reply Event
 	if len(s.Entities.UserMentions) > 0 {
 		for _, mention := range s.Entities.UserMentions {
 			if mention.ScreenName == "dmnlk" {
@@ -94,4 +100,13 @@ func sendReplyAndRetweetToProwl(s gomadare.Status) {
 			}
 		}
 	}
+	var buf bytes.Buffer
+	enc := gob.NewEncoder(&buf)
+	err := enc.Encode(s.RetweetedStatus)
+	if err != nil {
+		log.Fatal(err)
+	}
+
+	ioutil.WriteFile("rt.json", buf.Bytes(), os.ModePerm)
+
 }
