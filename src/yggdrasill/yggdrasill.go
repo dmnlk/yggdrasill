@@ -1,13 +1,8 @@
 package main
 
 import (
-	"bytes"
 	"fmt"
 	"os"
-
-	"encoding/gob"
-	"io/ioutil"
-	"log"
 
 	"github.com/dmnlk/gomadare"
 	"github.com/dmnlk/stringUtils"
@@ -66,7 +61,7 @@ func sendEventToProwl(e gomadare.Event) {
 	}
 	emoji := getEventEmoji(e)
 	n := &goprowl.Notification{
-		Application: "Twitter",
+		Application: "yggdrasill",
 		Description: emoji + " " + e.TargetObject.Text,
 		Event:       e.Event + " by " + e.Source.ScreenName,
 		Priority:    "1",
@@ -82,7 +77,13 @@ func getEventEmoji(event gomadare.Event) string {
 	if event.Event == "unfavorite" {
 		return "\U0001f44e"
 	}
-	return ""
+	if event.Event == "list_member_removed" {
+		return "\u274c"
+	}
+	if event.Event == "list_member_added"{
+		return "\u2755"
+	}
+	return event.Event
 }
 
 func sendReplyAndRetweetToProwl(s gomadare.Status) {
@@ -100,13 +101,6 @@ func sendReplyAndRetweetToProwl(s gomadare.Status) {
 			}
 		}
 	}
-	var buf bytes.Buffer
-	enc := gob.NewEncoder(&buf)
-	err := enc.Encode(s.RetweetedStatus)
-	if err != nil {
-		log.Fatal(err)
-	}
-
-	ioutil.WriteFile("rt.json", buf.Bytes(), os.ModePerm)
+	//pp.Print(s.RetweetedStatus)
 
 }
