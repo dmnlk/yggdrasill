@@ -80,10 +80,8 @@ func getEventEmoji(event gomadare.Event) string {
 	if event.Event == "list_member_removed" {
 		return "\u274c"
 	}
-	if event.Event == "list_member_added"{
+	if event.Event == "list_member_added" {
 		return "\u2755"
-
-		
 	}
 	return event.Event
 }
