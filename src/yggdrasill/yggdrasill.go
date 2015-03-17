@@ -7,6 +7,7 @@ import (
 	"github.com/dmnlk/gomadare"
 	"github.com/dmnlk/stringUtils"
 	"github.com/rem7/goprowl"
+	"github.com/k0kubun/pp"
 )
 
 var (
@@ -101,6 +102,9 @@ func sendReplyAndRetweetToProwl(s gomadare.Status) {
 			}
 		}
 	}
-	//pp.Print(s.RetweetedStatus)
-
+	if len(s.RetweetedStatus) > 0 {
+		for _, a := range s.RetweetedStatus.Entities.UserMentions {
+			pp.Print(a)
+		}
+	}
 }
