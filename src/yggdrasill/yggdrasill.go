@@ -8,6 +8,7 @@ import (
 	"github.com/dmnlk/stringUtils"
 	"github.com/rem7/goprowl"
 	"github.com/k0kubun/pp"
+	"log"
 )
 
 var (
@@ -84,6 +85,7 @@ func getEventEmoji(event gomadare.Event) string {
 	if event.Event == "list_member_added" {
 		return "\u2755"
 	}
+	log.Println("unknown event:" + event.Event)
 	return event.Event
 }
 
