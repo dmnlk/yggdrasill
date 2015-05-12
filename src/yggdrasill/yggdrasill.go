@@ -4,11 +4,11 @@ import (
 	"fmt"
 	"os"
 
+	"log"
+
 	"github.com/dmnlk/gomadare"
 	"github.com/dmnlk/stringUtils"
 	"github.com/rem7/goprowl"
-	"github.com/k0kubun/pp"
-	"log"
 )
 
 var (
@@ -102,11 +102,6 @@ func sendReplyAndRetweetToProwl(s gomadare.Status) {
 				}
 				PROWL.Push(n)
 			}
-		}
-	}
-	if len(s.RetweetedStatus) > 0 {
-		for _, a := range s.RetweetedStatus.Entities.UserMentions {
-			pp.Print(a)
 		}
 	}
 }
