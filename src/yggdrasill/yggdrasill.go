@@ -9,6 +9,7 @@ import (
 	"github.com/dmnlk/gomadare"
 	"github.com/dmnlk/stringUtils"
 	"github.com/rem7/goprowl"
+	"strings"
 )
 
 var (
@@ -94,12 +95,23 @@ func sendReplyAndRetweetToProwl(s gomadare.Status) {
 	if len(s.Entities.UserMentions) > 0 {
 		for _, mention := range s.Entities.UserMentions {
 			if mention.ScreenName == "dmnlk" {
-				n := &goprowl.Notification{
-					Application: "Golang",
-					Description: "\U0001f4a1" + " " + s.Text,
-					Event:       "Mentioned by " + s.User.ScreenName,
-					Priority:    "1",
+				var n *goprowl.Notification
+				if strings.Contains(s.Text, "RT") {
+					n = &goprowl.Notification{
+						Application: "Golang",
+						Description: "\U0001f4a1" + " " + s.Text,
+						Event:       "RT by " + s.User.ScreenName,
+						Priority:    "1",
+					}
+				} else {
+					n = &goprowl.Notification{
+						Application: "Golang",
+						Description: "\U0001f4a1" + " " + s.Text,
+						Event:       "Mentioned by " + s.User.ScreenName,
+						Priority:    "1",
+					}
 				}
+
 				PROWL.Push(n)
 			}
 		}
