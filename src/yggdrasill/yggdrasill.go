@@ -87,7 +87,7 @@ func getEventEmoji(event gomadare.Event) string {
 		return "\u2755"
 	}
 	if event.Event == "follow" {
-		return "\u2"
+		return "\u2661"
 	}
 	log.Println("unknown event:" + event.Event)
 	return event.Event
