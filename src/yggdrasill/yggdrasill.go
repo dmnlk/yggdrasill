@@ -93,6 +93,14 @@ func getEventEmoji(event gomadare.Event) string {
 	return event.Event
 }
 
+
+func getProwlNotification(event gomadare.Event, string emoji) goprowl.Notification {
+	n := &goprowl.Notification{
+
+	}
+	return n
+}
+
 func sendReplyAndRetweetToProwl(s gomadare.Status) {
 	// reply Event
 	if len(s.Entities.UserMentions) > 0 {
