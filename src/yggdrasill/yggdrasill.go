@@ -96,9 +96,9 @@ func getEventEmoji(event gomadare.Event) string {
 
 func getProwlNotification(event gomadare.Event, string emoji) goprowl.Notification {
 	n := &goprowl.Notification{
-
+		Application: "Yggdrsill",
 	}
-	return n
+	return *n
 }
 
 func sendReplyAndRetweetToProwl(s gomadare.Status) {
