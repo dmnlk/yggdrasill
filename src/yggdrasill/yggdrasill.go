@@ -99,7 +99,7 @@ func getProwlNotification(event gomadare.Event, string emoji) goprowl.Notificati
 		Application: "Yggdrsill",
 		Priority: "1",
 	}
-	
+
 	return *n
 }
 
@@ -128,5 +128,17 @@ func sendReplyAndRetweetToProwl(s gomadare.Status) {
 				PROWL.Push(n)
 			}
 		}
+	}
+
+	//RTイベント
+	if len(s.RetweetedStatus) > 0 {
+		n := &goprowl.Notification{
+			Application: "Golang",
+			Description: "\U0001f4a1" + " " + s.Text,
+			Event:       "RT by " + s.User.ScreenName,
+			Priority:    "1",
+		}
+
+		PROWL.Push(n)
 	}
 }
