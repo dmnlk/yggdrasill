@@ -1,0 +1,22 @@
+{
+	"ImportPath": "github.com/dmnlk/yggdrasill/src/yggdrasill",
+	"GoVersion": "go1.4",
+	"Deps": [
+		{
+			"ImportPath": "github.com/dmnlk/gomadare",
+			"Rev": "5ca1874da3bc57f45cc2fc9b544122ca0eb32d29"
+		},
+		{
+			"ImportPath": "github.com/dmnlk/stringUtils",
+			"Rev": "aa88c62978f542bc37b16df42c53cbdbd2fdae39"
+		},
+		{
+			"ImportPath": "github.com/mrjones/oauth",
+			"Rev": "88b8bebdf9952359da71031ef9ab7d27aece46d4"
+		},
+		{
+			"ImportPath": "github.com/rem7/goprowl",
+			"Rev": "54237fc241aaa39e4281ab09e15e9423c817c7d0"
+		}
+	]
+}

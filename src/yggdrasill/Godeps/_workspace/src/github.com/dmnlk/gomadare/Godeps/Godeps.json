@@ -1,0 +1,18 @@
+{
+	"ImportPath": "github.com/dmnlk/gomadare",
+	"GoVersion": "go1.3",
+	"Deps": [
+		{
+			"ImportPath": "github.com/k0kubun/pp",
+			"Rev": "47b9561a7c1380b16d5a565b14146fef01bf7a28"
+		},
+		{
+			"ImportPath": "github.com/mattn/go-colorable",
+			"Rev": "043ae16291351db8465272edf465c9f388161627"
+		},
+		{
+			"ImportPath": "github.com/mrjones/oauth",
+			"Rev": "9066ed6d9b11b1863f1060fe403a7e5f3de0fe5c"
+		}
+	]
+}
