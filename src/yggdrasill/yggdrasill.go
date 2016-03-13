@@ -94,7 +94,7 @@ func getEventEmoji(event gomadare.Event) string {
 }
 
 
-func getProwlNotification(event gomadare.Event, string emoji) goprowl.Notification {
+func getProwlNotification(event gomadare.Event) goprowl.Notification {
 	n := &goprowl.Notification{
 		Application: "Yggdrsill",
 		Priority: "1",
