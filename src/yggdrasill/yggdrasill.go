@@ -34,7 +34,7 @@ func main() {
 	}
 
 	client := gomadare.NewClient(CONSUMER_KEY, CONSUMER_KEY_SECRET, ACCESS_TOKEN, ACCESS_TOKEN_SECRET)
-	fmt.Println("aa")
+
 	client.GetUserStream(nil, func(s gomadare.Status, e gomadare.Event) {
 		if &s != nil {
 			go sendReplyAndRetweetToProwl(s)
@@ -111,14 +111,14 @@ func sendReplyAndRetweetToProwl(s gomadare.Status) {
 				var n *goprowl.Notification
 				if strings.Contains(s.Text, "RT") {
 					n = &goprowl.Notification{
-						Application: "Golang",
+						Application: "yggdrasill",
 						Description: "\U0001f4a1" + " " + s.Text,
 						Event:       "RT by " + s.User.ScreenName,
 						Priority:    "1",
 					}
 				} else {
 					n = &goprowl.Notification{
-						Application: "Golang",
+						Application: "yggdrasill",
 						Description: "\U0001f4a1" + " " + s.Text,
 						Event:       "Mentioned by " + s.User.ScreenName,
 						Priority:    "1",
@@ -131,9 +131,9 @@ func sendReplyAndRetweetToProwl(s gomadare.Status) {
 	}
 
 	//RTイベント
-	if len(s.RetweetedStatus) > 0 {
+	if s.RetweetedStatus.User.ScreenName == "dmnlk" {
 		n := &goprowl.Notification{
-			Application: "Golang",
+			Application: "yggdrasill",
 			Description: "\U0001f4a1" + " " + s.Text,
 			Event:       "RT by " + s.User.ScreenName,
 			Priority:    "1",
