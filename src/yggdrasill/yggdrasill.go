@@ -17,6 +17,7 @@ var (
 	CONSUMER_KEY_SECRET string
 	ACCESS_TOKEN        string
 	ACCESS_TOKEN_SECRET string
+	SCREEN_NAME			string
 	PROWL_API_KEY       string
 	PROWL               goprowl.Goprowl
 )
@@ -30,6 +31,12 @@ func main() {
 	err = PROWL.RegisterKey(PROWL_API_KEY)
 	if err != nil {
 		fmt.Println(err)
+		return
+	}
+
+	SCREEN_NAME = os.Getenv("SCREEN_NAME")
+
+	if len(SCREEN_NAME) < 0 {
 		return
 	}
 
@@ -62,6 +69,11 @@ func sendEventToProwl(e gomadare.Event) {
 	if stringUtils.IsEmpty(e.Event) {
 		return
 	}
+
+	if (e.Event == "favorite" || e.Event == "unfavorite") && e.Source.ScreenName == SCREEN_NAME {
+		return
+	}
+
 	emoji := getEventEmoji(e)
 	n := &goprowl.Notification{
 		Application: "yggdrasill",
