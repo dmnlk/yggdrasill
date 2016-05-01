@@ -70,7 +70,7 @@ func sendEventToProwl(e gomadare.Event) {
 		return
 	}
 
-	if (e.Event == "favorite" || e.Event == "unfavorite" || e.Event == "retweeted_retweet") && e.Source.ScreenName == SCREEN_NAME {
+	if (e.Event == "favorite" || e.Event == "unfavorite" || e.Event == "retweeted_retweet"  || e.Event == "follow") && e.Source.ScreenName == SCREEN_NAME {
 		return
 	}
 
