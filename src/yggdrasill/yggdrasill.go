@@ -143,7 +143,7 @@ func sendReplyAndRetweetToProwl(s gomadare.Status) {
 	}
 
 	//RTイベント
-	if s.RetweetedStatus.User.ScreenName == "dmnlk" {
+	if s.RetweetedStatus.User.ScreenName == SCREEN_NAME {
 		n := &goprowl.Notification{
 			Application: "yggdrasill",
 			Description: "\U0001f4a1" + " " + s.Text,
