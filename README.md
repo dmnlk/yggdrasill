@@ -1,7 +1,7 @@
 yggdrasill
 ==========
 TwiProwlをgoで書いてみる感じ
-
+[![CircleCI](https://circleci.com/gh/dmnlk/yggdrasill/tree/master.svg?style=svg)](https://circleci.com/gh/dmnlk/yggdrasill/tree/master)
 
 ## Usage
 
